@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/48258f18-c857-42d4-b713-0e8ba7a71c12/resourceGroups/rg-KBPracticeOnline/providers/Microsoft.Web/sites/KBPracticeOnline"
+}

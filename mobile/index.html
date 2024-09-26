@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="Knowledge Bowl Multiplayer | Answer Questions">
+        <meta name="msvalidate.01" content="1543F69F9785BD1D546BAC3555EE7A44" />
+        <meta name="description" content="Welcome to the one and only site to practice Knowledge Bowl in a multiplayer room. Answer real Knowledge Bowl questions pulled from a database of over 10,000 questions.">
+        <meta name="keywords" content="knowledge, bowl, practice, online, questions, answers, trivia, quizbowl, protobowl, naqt, database">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="English">
+        <meta name="author" content="Daniel Jungwrth">
+        <title>Knowledge Bowl Multiplayer | Answer Questions</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!-- Latest compiled and minified CSS -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Latest compiled JavaScript -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9634509801996499"
+        crossorigin="anonymous"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-R48W2DEJB3"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-R48W2DEJB3');
+        </script>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Knowledge Bowl Practice</a>
+              <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="navbar-collapse collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="https://kbpractice.com">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="https://online.kbpractice.com">Multiplayer</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="https://db.kbpractice.com">Access Database</a>
+                  </li>
+                </ul>
+                <form method="GET" action="https://db.kbpractice.com" class="d-flex">
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="searchInput" placeholder="Search database" aria-label="Answer question" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="Submit your search term" onclick="location.replace('https://db.kbpractice.com/?q=' + document.getElementById('searchInput').value);">Search</button>
+                      </div>
+                  </div>
+                </form>
+                
+              </div>
+            </div>
+          </nav>
+        <div id="full-container" class="container-md">
+            <div id="container" class="row">
+                <div id="form-inputs" class="col-sm-8">
+                    <h1 class="mb-1" id="pagetitle">Knowledge Bowl Online</h1>
+                    <p class="lead mb-5" id="subtitle">Oral Round Practice</p>
+                    <div class="row">
+                        <form class="col-md-6 mb-3 form-group" id="next" action="" style=" width: 50%; display: inline;">
+                            <button type="submit" class="btn btn-primary shadow" data-toggle="tooltip" data-placement="top" title="Go to the next question" style=" width: 100%;">Next</button>
+                        </form>
+                        <form class="col-md-6 mb-3 form-group" action="" id="buzz" style=" display: inline; width: 50%;">
+                            <button type="submit" class="btn btn-danger shadow" data-toggle="tooltip" data-placement="top" title="Buzz in to answer the question" style=" width: 100%;">Buzz</button>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form class="col-sm-8" action="" id="answer" autocomplete="off">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="answerInput" placeholder="Answer question..." aria-label="Answer question" aria-describedby="basic-addon2" disabled>
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-success" type="submit" data-toggle="tooltip" data-placement="top" style="border-radius: 0rem 0.25rem 0.25rem 0rem;" title="Submit your answer">Answer</button>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+                    <div class="card mb-5" id="question-read" style="height: 12rem;">
+                        <div class="card-header">
+                          Question
+                        </div>
+                        <div class="card-body d-flex justify-content-between flex-column">
+                            <div id="question">Press the "Next" button to get a new question.</div>
+                            <div class="progress w-25 mt-1">
+                                <div class="progress-bar" role="progressbar" id="timer" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chat-container" class="col-sm-4">
+                        <div class="border px-3 rounded mb-3">
+                            <div id="chat" style="   height: 200px; padding-top: 10px; word-wrap: break-word; " class="overflow-auto"></div>
+                            <form class="form-inline" action="" id="chatBtn" autocomplete="off">
+                                <div class="input-group my-3">
+                                    <input type="text" class="form-control" id="chatInput" placeholder="Type to chat..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                    <button id="sendChatBtn" class="btn btn-outline-primary" type="submit" data-toggle="tooltip" data-placement="top" style="border-radius: 0rem 0.25rem 0.25rem 0rem;" title="Send a message to chat">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="input-group mb-3 col-sm-4">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1" style="border-radius: 0.25rem 0rem 0rem 0.25rem;">@</span>
+                                </div>
+                                <input type="text" class="form-control" id="username" autocomplete="off" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-group mb-5" id="queue">
+                                <li class="list-group-item list-group-item-secondary">Buzz Queue</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-group mb-5" id="players">
+                                <li class="list-group-item list-group-item-secondary">Active Players</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" id="roomInputContainer" style="display: none;">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">Join a room</h5>
+                                  <p class="card-text">You are currently in the public lobby. Enter a code to create a room or, if it already exists, join it.</p>
+                                  <div class="input-group mb-3">
+                                    <input type="text" id="roomInput" class="form-control" placeholder="Room name" aria-label="Room name" aria-describedby="button-addon2">
+                                    <button id="roomBtn" class="btn btn-success" type="button" id="button-addon2">Join/Create Room</button>
+                                  </div>
+                                  <p>Or you can join a public, category-specific room: </p>
+                                  <div style="display: block;">
+                                    <a href="https://online.kbpractice.com/mobile/?room=geography" type="button" class="btn btn-outline-success">Geography</a>
+                                    <a href="https://online.kbpractice.com/mobile/?room=history" type="button" class="btn btn-outline-success">History</a>
+                                    <a href="https://online.kbpractice.com/mobile/?room=math" type="button" class="btn btn-outline-success">Math</a>
+                                    <a href="https://online.kbpractice.com/mobile/?room=art" type="button" class="btn btn-outline-success">Art</a>
+                                    <a href="https://online.kbpractice.com/mobile/?room=literature" type="button" class="btn btn-outline-success">Literature</a>
+                                    <a href="https://online.kbpractice.com/mobile/?room=music" type="button" class="btn btn-outline-success">Music</a>
+                                    <a href="https://online.kbpractice.com/mobile/?room=science" type="button" class="btn btn-outline-success">Science</a>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9634509801996499"
+                        crossorigin="anonymous"></script>
+                    <!-- online_display -->
+                    <ins class="adsbygoogle"
+                        style="display:block"
+                        data-ad-client="ca-pub-9634509801996499"
+                        data-ad-slot="6390119692"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    <div class="card my-3">
+                        <div class="card-header">Donate</div>
+                        <div class="card-body">
+                          <p class="card-text">I'm a high school student working on a negative salary. If you like what I've made, <a class="text-success" href="https://www.buymeacoffee.com/danieljungwirth">consider donating</a>.</p>
+                        </div>
+                      </div>
+                    <div class="card my-3">
+                        <div class="card-header">Community</div>
+                        <div class="card-body">
+                          <p class="card-text">Have a question, suggestion, or new idea for the site? Consider joining our <a href="https://discord.gg/rtpUE56tnT">Discord server</a>.</p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" id="disconnectedModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">You were disconnected</h5>
+                  <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Unfortunately, your computer lost its connection to the server. Reload the page to reconnect. If you see a page titled "Server Error", just reload again.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="window.location.reload();">Reload</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" tabindex="-1" role="dialog" id="errorModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Something Went Wrong</h5>
+                  <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>An error has occured, and the server needs to do a hard reset. Don't fret! Just reload the page. It may take a bit, but everything will be fixed when you come back.</p>
+                </div>  
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="window.location.reload();">Reload</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" tabindex="-1" role="dialog" id="kickedModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">You have Been Kicked</h5>
+                  <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>You were disconnected by a moderator. Treat this as a warning. You can reconnect again, but be careful.</p>
+                </div>  
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="window.location.reload();">Reload</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" tabindex="-1" role="dialog" id="bannedModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">You have Been Banned</h5>
+                  <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>You have been banned by a moderator. Please contact us on the Discord if you think this was a mistake.</p>
+                </div>  
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="window.location.reload();">Reload</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+
+        var question = document.getElementById('question');
+                var players = document.getElementById('players');
+                var nextBtn = document.getElementById('next');
+                var buzzBtn = document.getElementById('buzz');
+                var answerBtn = document.getElementById('answer');
+                var username = document.getElementById('username');
+                var answerInput = document.getElementById('answerInput');
+                var pageTitle = document.getElementById("pagetitle");
+                var subtitle = document.getElementById("subtitle");
+                var currentConnections = {};
+                var dialogue = document.getElementById("dialogues");
+                var timer = document.getElementById("timer");
+                var chat = document.getElementById("chat");
+                var chatInput = document.getElementById("chatInput");
+                var chatBtn = document.getElementById("chatBtn");
+                var sendChatBtn = document.getElementById("sendChatBtn");
+                var queue = document.getElementById('queue');
+                var roomBtn = document.getElementById("roomBtn");
+                var roomInput = document.getElementById("roomInput");
+                var roomInputContainer = document.getElementById("roomInputContainer");
+                
+                var queryString = window.location.search;
+                var urlParams = new URLSearchParams(queryString);
+                var room = urlParams.get('room');
+                var title = document.getElementById("title");
+        
+                if(room === undefined || room === "" || room === null) {
+                    room = "lobby";
+                    roomInputContainer.style.display = "block";
+                } else {
+                    subtitle.innerHTML = `Room: <span class="badge bg-dark">${room}</span>`
+                }
+        
+                roomBtn.addEventListener("click", () => {
+                    window.location.href = window.location.href + "?room=" + roomInput.value;
+                })
+        
+                if (screen.width >= 560) {
+                    window.location.href = "https://online.kbpractice.com/";
+                }
+        
+                var adjectives = [
+                    "attractive", "bald", "beautiful", "chubby", "clean", "dazzling", "drab", "elegant", "fancy", "fit", "flabby", "glamorous", "gorgeous", "handsome", "long", "magnificent", "muscular", "plain", "plump", "quaint", "scruffy", "shapely", "short", "skinny", "stocky", "ugly", "unkempt", "unsightly"
+                ];
+                var nouns = [
+                    "lizard", "bull", "anteater", "wombat", "boar", "crow", "polar bear", "chimpanzee", "shrew", "fish", "camel", "pronghorn", "mole", "finch", "basilisk", "hyena", "yak", "skunk", "chameleon", "chipmunk", "frog", "badger", "ibex", "newt", "addax", "bumble bee", "mule", "gemsbok", "ermine"
+                ]
+        
+        
+        
+                var mod = false;
+                var ip = "";
+        
+                var bad_words = ["nigg", "卐", "卍"];
+        
+                var adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+                var noun = nouns[Math.floor(Math.random() * nouns.length)];
+        
+                if (localStorage.getItem("kbuser")===null) {
+                    displayName = adjective + " " + noun;
+                } else {
+                    displayName = localStorage.getItem("kbuser");
+                }
+                username.value = displayName;
+        
+                username.addEventListener('keyup', function () {
+                    displayName = username.value;
+                    socket.emit('changed name', displayName)
+                    localStorage.setItem('kbuser', displayName)
+                })
+        
+                var socket = io(
+                    {
+                        query: {
+                            room: room,
+                            name: displayName
+                        }
+                    }
+                );
+        
+                socket.emit('changed name', displayName);
+        
+                chatInput.addEventListener('keyup', function () {
+                    var has_sworn = false;
+                    for(var i = 0; i < bad_words.length; i++) {
+                        if(chatInput.value.toLowerCase().replace(/[\W_]/g, "").replace("hello", "").includes(bad_words[i])) {
+                            has_sworn = true;
+                        }
+                    }
+                    if(has_sworn) {
+                        sendChatBtn.setAttribute("disabled", "true");
+                        sendChatBtn.classList.remove("btn-outline-primary");
+                        sendChatBtn.classList.add("btn-outline-danger");
+                        chatInput.classList.add("is-invalid");
+                    } else {
+                        sendChatBtn.removeAttribute("disabled");
+                        sendChatBtn.classList.remove("btn-outline-danger");
+                        sendChatBtn.classList.add("btn-outline-primary");
+                        chatInput.classList.remove("is-invalid");
+                    }
+                })
+        
+        
+                chatBtn.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var message = chatInput.value;
+                    socket.emit('message submitted', message);
+                    chatInput.value = "";
+                })
+        
+                nextBtn.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    socket.emit('next question');
+                })
+        
+                buzzBtn.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    socket.emit('buzz attempted');
+                })
+        
+                document.addEventListener("keydown", function(e) {
+                    if(document.activeElement !== chatInput) {
+                        if(document.activeElement !== username) {
+                            if(document.activeElement !== answerInput) {
+                                if(document.activeElement !== roomInput) {
+                                    if(e.keyCode === 32) {
+                                        e.preventDefault();
+                                        socket.emit('buzz attempted');
+                                    } else if (e.keyCode === 78) {
+                                        socket.emit('next question');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+        
+                fetch('https://api.ipify.org?format=json')
+                .then(results => results.json()) 
+                .then(data => socket.emit('ip', data.ip))
+                .then(data => ip = data.ip)
+        
+        
+                    document.addEventListener("keyup", function (e) {
+                        if (document.activeElement !== chatInput) {
+                            if (document.activeElement !== username) {
+                                if (document.activeElement !== answerInput) {
+                                    if (e.keyCode === 191) {
+                                        chatInput.focus();
+                                        chatInput.value = "";
+                                    }
+                                }
+                            }
+                        }
+                    })
+        
+        
+                
+        
+        
+                answerBtn.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    if (!answerInput.disabled) {
+                        socket.emit('answer submitted', answerInput.value);
+                    }
+                })
+        
+                window.addEventListener('blur', function () {
+                    socket.emit('inactive');
+                })
+        
+                window.addEventListener('focus', function () {
+                    socket.emit('active');
+                })
+        
+                socket.on('question sent', (msg) => {
+                    if (msg !== "") {
+                        question.innerText = msg;
+                    }
+                })
+        
+                socket.on('buzz accepted', (msg) => {
+                    var chatMessage = document.createElement("i");
+                    chatMessage.classList.add("d-block");
+                    chatMessage.classList.add("mb-3")
+                    var userSpan = document.createElement("span");
+                    userSpan.className += " " + msg + "-user";
+                    userSpan.innerText = currentConnections[msg]['name'];
+                    chatMessage.appendChild(userSpan);
+                    chatMessage.innerHTML += " buzzed in.";
+                    chat.appendChild(chatMessage);
+        
+                    chat.scrollTop = chat.scrollHeight;
+        
+                    if (msg === socket.id) {
+                        answerInput.disabled = false;
+                        answerInput.focus();
+                    }
+                })
+        
+        
+                socket.on('correct', (msg) => {
+                    playerCorrect = currentConnections[msg[0]]['name'];
+                    guess = msg[1];
+                    var chatMessage = document.createElement("div");
+        
+                    chatMessage.classList.add("alert");
+                    chatMessage.classList.add("alert-success");
+                    var userSpan = document.createElement("span");
+                    userSpan.className += " " + msg[0] + "-user";
+                    userSpan.innerText = playerCorrect;
+                    chatMessage.appendChild(userSpan);
+                    chatMessage.innerHTML += " guessed ";
+                    var answerStrong = document.createElement("strong");
+                    answerStrong.innerText = guess;
+                    chatMessage.appendChild(answerStrong);
+                    chatMessage.innerHTML += "  and it was correct!";
+        
+        
+                    chat.appendChild(chatMessage);
+                    chat.appendChild(document.createElement("hr"));
+                    chat.scrollTop = chat.scrollHeight;
+        
+                    answerInput.value = "";
+                    answerInput.disabled = true;
+                })
+        
+                socket.on("mod", () => {
+                    mod = true;
+                    var playerList = Object.keys(currentConnections).map(function (key) {
+                        return currentConnections[key];
+                    });
+                    players.innerText = "";
+                    var playerButton = document.createElement("li");
+                    playerButton.innerText = "Active Players";
+                    playerButton.classList.add("list-group-item");
+                    playerButton.classList.add("list-group-item-secondary");
+                    players.appendChild(playerButton);
+                    for (var i = 0; i < playerList.length; i++) {
+                        if (playerList[i]['name'] !== "") {
+                            var playerButton = document.createElement("li");
+                            playerButton.classList.add("list-group-item");
+                            playerButton.classList.add("d-flex");
+                            playerButton.classList.add("justify-content-between");
+                            playerButton.classList.add("align-items-center");
+                            playerButton.innerText = playerList[i]['name'];
+                            if (! playerList[i]['active']) {
+                                playerButton.classList.add('text-muted');
+                            }
+                            playerButton.id = Object.entries(currentConnections)[i][0];
+                            var pointsBadge = document.createElement("span");
+                            pointsBadge.classList.add("badge");
+                            pointsBadge.classList.add("rounded-pill");
+                            pointsBadge.classList.add("bg-primary");
+                            pointsBadge.id = Object.entries(currentConnections)[i][0];
+                            pointsBadge.innerText = playerList[i]['points'];
+                            if (mod) {
+                                var kickButton = document.createElement("button");
+                                kickButton.classList.add('btn');
+                                kickButton.classList.add('btn-outline-danger');
+                                kickButton.classList.add('btn-sm');
+                                kickButton.innerText = "Kick";
+                                kickButton.addEventListener('click', function () {
+                                    kick(this)
+                                })
+                                playerButton.appendChild(kickButton);
+        
+                                var banButton = document.createElement("button");
+                                banButton.classList.add('btn');
+                                banButton.classList.add('btn-outline-dark');
+                                banButton.classList.add('btn-sm');
+                                banButton.innerText = "Ban";
+                                banButton.addEventListener('click', function () {
+                                    ban(this)
+                                })
+                                playerButton.appendChild(banButton);
+                            }
+                            playerButton.appendChild(pointsBadge);
+                            players.appendChild(playerButton);
+        
+                            var allInstances = document.getElementsByClassName(Object.entries(currentConnections)[i][0] + "-user");
+                            for (var ii = 0; ii < allInstances.length; ii++) {
+                                allInstances[ii].innerText = playerList[i]['name'];
+                            }
+                        }
+                    }
+                })
+        
+                socket.on('incorrect', (msg) => {
+                    playerCorrect = currentConnections[msg[0]]['name'];
+                    guess = msg[1];
+                    var chatMessage = document.createElement("div");
+        
+                    chatMessage.classList.add("alert");
+                    chatMessage.classList.add("alert-danger");
+                    var userSpan = document.createElement("span");
+                    userSpan.className += " " + msg[0] + "-user";
+                    userSpan.innerText = playerCorrect;
+                    chatMessage.appendChild(userSpan);
+                    chatMessage.innerHTML += " guessed ";
+                    var answerStrong = document.createElement("strong");
+                    answerStrong.innerText = guess;
+                    chatMessage.appendChild(answerStrong);
+                    chatMessage.innerHTML += "  and it was incorrect.";
+        
+        
+                    chat.appendChild(chatMessage);
+                    chat.scrollTop = chat.scrollHeight;
+        
+                    answerInput.value = "";
+                    answerInput.disabled = true;
+                })
+        
+                socket.on('buzz done', (msg) => {
+                    var chatMessage = document.createElement("i");
+                    chatMessage.classList.add("d-block");
+                    chatMessage.classList.add("mb-3")
+                    var userSpan = document.createElement("span");
+                    userSpan.className += " " + msg + "-user";
+                    userSpan.innerText = currentConnections[msg]['name'];
+                    chatMessage.appendChild(userSpan);
+                    chatMessage.innerHTML += " had no answer.";
+                    chat.appendChild(chatMessage);
+        
+                    chat.scrollTop = chat.scrollHeight;
+        
+                    if (msg === socket.id) {
+                        answerInput.value = "";
+                        answerInput.disabled = true;
+                    }
+                })
+        
+                socket.on('question over', (msg) => {
+                    var chatMessage = document.createElement("div");
+                    chatMessage.innerHTML = "<div class='alert alert-primary' role='alert'>" + "Question is over. Correct answer: " + msg["Answer"] + " | " + "<a class='alert-link' target='blank' href='https://kbpractice.com/report/?id=" + msg["ID"] + "'>Report</a></div><hr>"
+                    chat.appendChild(chatMessage);
+                    chat.scrollTop = chat.scrollHeight;
+                })
+        
+                socket.on('queue changed', (msg) => {
+                    queue.innerText = "";
+                    queueButton = document.createElement("li");
+                    queueButton.innerText = "Buzz Queue";
+                    queueButton.classList.add("list-group-item");
+                    queueButton.classList.add("list-group-item-secondary");
+                    queue.appendChild(queueButton);
+                    for (var i = 0; i < msg.length; i++) {
+                        var queueBuzz = document.createElement('li');
+                        queueBuzz.classList.add("list-group-item")
+                        queueBuzz.innerText = currentConnections[msg[i]]['name'];
+                        queue.appendChild(queueBuzz);
+                    }
+                })
+        
+                function kick(evt) {
+                    var el = event.target;
+                    id = el.parentElement.id;
+                    socket.emit("kick", id)
+                }
+        
+                function ban(evt) {
+                    var el = event.target;
+                    id = el.parentElement.id;
+                    socket.emit("ban", id)
+                }
+        
+                socket.on('players changed', function (msg) {
+                    currentConnections = msg;
+                    var playerList = Object.keys(msg).map(function (key) {
+                        return msg[key];
+                    });
+                    players.innerText = "";
+                    var playerButton = document.createElement("li");
+                    playerButton.innerText = "Active Players";
+                    playerButton.classList.add("list-group-item");
+                    playerButton.classList.add("list-group-item-secondary");
+                    players.appendChild(playerButton);
+                    for (var i = 0; i < playerList.length; i++) {
+                        if (playerList[i]['name'] !== "") {
+                            var playerButton = document.createElement("li");
+                            playerButton.classList.add("list-group-item");
+                            playerButton.classList.add("d-flex");
+                            playerButton.classList.add("justify-content-between");
+                            playerButton.classList.add("align-items-center");
+                            playerButton.innerText = playerList[i]['name'];
+                            if (! playerList[i]['active']) {
+                                playerButton.classList.add('text-muted');
+                            }
+                            playerButton.id = Object.entries(msg)[i][0];
+                            var pointsBadge = document.createElement("span");
+                            pointsBadge.classList.add("badge");
+                            pointsBadge.classList.add("rounded-pill");
+                            pointsBadge.classList.add("bg-primary");
+                            pointsBadge.id = Object.entries(msg)[i][0];
+                            pointsBadge.innerText = playerList[i]['points'];
+                            if (mod) {
+                                var kickButton = document.createElement("button");
+                                kickButton.classList.add('btn');
+                                kickButton.classList.add('btn-outline-danger');
+                                kickButton.classList.add('btn-sm');
+                                kickButton.innerText = "Kick";
+                                kickButton.addEventListener('click', function () {
+                                    kick(this)
+                                })
+                                playerButton.appendChild(kickButton);
+        
+                                var banButton = document.createElement("button");
+                                banButton.classList.add('btn');
+                                banButton.classList.add('btn-outline-dark');
+                                banButton.classList.add('btn-sm');
+                                banButton.innerText = "Ban";
+                                banButton.addEventListener('click', function () {
+                                    ban(this)
+                                })
+                                playerButton.appendChild(banButton);
+                            }
+                            playerButton.appendChild(pointsBadge);
+                            players.appendChild(playerButton);
+        
+                            var allInstances = document.getElementsByClassName(Object.entries(msg)[i][0] + "-user");
+                            for (var ii = 0; ii < allInstances.length; ii++) {
+                                allInstances[ii].innerText = playerList[i]['name'];
+                            }
+                        }
+                    }
+                })
+        
+                socket.on("points changed", function (msg) {
+                    var points = Object.entries(msg);
+                    for (var i = 0; i < points.length; i++) {
+                        var pointsBadge = document.getElementById(points[i][0] + "-points");
+                        pointsBadge.innerText = points[i][1];
+                    }
+                })
+        
+                socket.on("active player", function (msg) {
+                    if (document.getElementById(msg).classList.contains('text-muted')) {
+                        document.getElementById(msg).classList.remove('text-muted');
+                    }
+                })
+        
+                socket.on("inactive player", function (msg) {
+                    document.getElementById(msg).classList.add('text-muted');
+                })
+        
+                socket.on('message sent', function (msg) {
+                    var chatMessage = document.createElement("p");
+                    var userSpan = document.createElement("span");
+                    userSpan.classList.add(msg[1] + "-user");
+                    userSpan.innerText = currentConnections[msg[1]]['name'];
+                    chatMessage.appendChild(userSpan);
+                    chatMessage.innerHTML += ": ";
+                    strong = document.createElement("strong");
+                    strong.innerText = msg[0];
+                    chatMessage.appendChild(strong);
+                    chat.appendChild(chatMessage);
+                    chat.scrollTop = chat.scrollHeight;
+        
+                })
+        
+                socket.on('answer countdown', (msg) => {
+                    timer.setAttribute("style", "width:" + msg * 10 + "%;")
+                })
+        
+                socket.on('end of question countdown', (msg) => {
+                    timer.setAttribute("style", "width:" + msg * 10 + "%;")
+                })
+        
+                socket.on('disconnect', function () {
+                    var modal = new bootstrap.Modal(document.getElementById('disconnectedModal'), {});
+                    modal.show();
+                })
+        
+                socket.on('kicked', function () {
+                    var modal = new bootstrap.Modal(document.getElementById('kickedModal'), {});
+                    modal.show();
+                })
+        
+                socket.on('banned', function () {
+                    var modal = new bootstrap.Modal(document.getElementById('bannedModal'), {});
+                    modal.show();
+                    socket.disconnect();
+                })
+        
+                socket.on('something went wrong', function () {
+                    var modal = new bootstrap.Modal(document.getElementById('errorModal'), {});
+                    modal.show();
+                })
+            </script>
+    <style>
+    ::-webkit-scrollbar {
+        display: none;
+      }
+      </style>
+</html>
