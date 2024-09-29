@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "index.js"
+    "start": "index.js",
+    "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",
@@ -22,5 +23,9 @@
     "socket.io": "^4.3.2",
     "string-similarity": "^4.0.4",
     "words-to-numbers": "^1.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.11.1",
+    "eslint-config-eslint": "^11.0.0"
   }
 }
